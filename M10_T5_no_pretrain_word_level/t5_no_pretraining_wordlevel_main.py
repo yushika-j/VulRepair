@@ -390,8 +390,14 @@ def main():
 
     tokenizer = Tokenizer.from_file('./wordlevel_tokenizer/wordlevel.json') 
     
-    config = T5Config.from_pretrained(args.config_name)
-    model = T5ForConditionalGeneration(config=config)    
+    #config = T5Config.from_pretrained("t5-base")
+    #config.decoder_start_token_id = config.pad_token_id
+    #config = T5Config.from_pretrained(args.config_name)
+    #model = T5ForConditionalGeneration(config=config)    
+    #model = T5ForConditionalGeneration(config)
+    config = T5Config.from_pretrained("/scratch/rinao/VulRepair/t5-base-model")
+    #model = T5ForConditionalGeneration.from_pretrained("/scratch/rinao/VulRepair/t5-base")
+    model = T5ForConditionalGeneration.from_pretrained("/scratch/rinao/VulRepair/t5-base-model")
     model.resize_token_embeddings(32100)
     
     logger.info("Training/evaluation parameters %s", args)

@@ -1,0 +1,149 @@
+created virtual environment CPython3.11.5.final.0-64 in 33508ms
+  creator CPython3Posix(dest=/localscratch/rinao.54542535.0/env, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/home/rinao/.local/share/virtualenv)
+    added seed packages: pip==23.2.1, setuptools==68.0.0, wheel==0.41.1
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/transformers-4.49.0+computecanada-py3-none-any.whl
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/filelock-3.17.0+computecanada-py3-none-any.whl (from transformers)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/huggingface_hub-0.29.3+computecanada-py3-none-any.whl (from transformers)
+Requirement already satisfied: numpy>=1.17 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from transformers) (1.25.2+computecanada)
+Requirement already satisfied: packaging>=20.0 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from transformers) (23.1+computecanada)
+Requirement already satisfied: pyyaml>=5.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from transformers) (6.0.1+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/regex-2024.11.6+computecanada-cp311-cp311-linux_x86_64.whl (from transformers)
+Requirement already satisfied: requests in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from transformers) (2.31.0+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic/tokenizers-0.21.0+computecanada-cp39-abi3-linux_x86_64.whl (from transformers)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic/safetensors-0.4.5+computecanada-cp311-cp311-linux_x86_64.whl (from transformers)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/tqdm-4.67.1+computecanada-py3-none-any.whl (from transformers)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/fsspec-2025.3.0+computecanada-py3-none-any.whl (from huggingface-hub<1.0,>=0.26.0->transformers)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.26.0->transformers) (4.7.1+computecanada)
+Requirement already satisfied: charset-normalizer<4,>=2 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests->transformers) (3.2.0+computecanada)
+Requirement already satisfied: idna<4,>=2.5 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests->transformers) (3.4+computecanada)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests->transformers) (2.0.4+computecanada)
+Requirement already satisfied: certifi>=2017.4.17 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests->transformers) (2023.7.22+computecanada)
+Installing collected packages: tqdm, safetensors, regex, fsspec, filelock, huggingface-hub, tokenizers, transformers
+Successfully installed filelock-3.17.0+computecanada fsspec-2025.3.0+computecanada huggingface-hub-0.29.3+computecanada regex-2024.11.6+computecanada safetensors-0.4.5+computecanada tokenizers-0.21.0+computecanada tqdm-4.67.1+computecanada transformers-4.49.0+computecanada
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3/torch-2.6.0+computecanada-cp311-cp311-linux_x86_64.whl
+Requirement already satisfied: filelock in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from torch) (3.17.0+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/typing_extensions-4.12.2+computecanada-py3-none-any.whl (from torch)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/networkx-3.4.2+computecanada-py3-none-any.whl (from torch)
+Requirement already satisfied: jinja2 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from torch) (3.1.2+computecanada)
+Requirement already satisfied: fsspec in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from torch) (2025.3.0+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/sympy-1.13.1+computecanada-py3-none-any.whl (from torch)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from sympy==1.13.1->torch) (1.3.0+computecanada)
+Requirement already satisfied: MarkupSafe>=2.0 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from jinja2->torch) (2.1.3+computecanada)
+Installing collected packages: typing-extensions, sympy, networkx, torch
+  Attempting uninstall: typing-extensions
+    Found existing installation: typing_extensions 4.7.1+computecanada
+    Not uninstalling typing-extensions at /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages, outside environment /localscratch/rinao.54542535.0/env
+    Can't uninstall 'typing_extensions'. No files were found to uninstall.
+  Attempting uninstall: sympy
+    Found existing installation: sympy 1.12+computecanada
+    Not uninstalling sympy at /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages, outside environment /localscratch/rinao.54542535.0/env
+    Can't uninstall 'sympy'. No files were found to uninstall.
+Successfully installed networkx-3.4.2+computecanada sympy-1.13.1+computecanada torch-2.6.0+computecanada typing-extensions-4.12.2+computecanada
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Requirement already satisfied: numpy in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (1.25.2+computecanada)
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Requirement already satisfied: tqdm in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (4.67.1+computecanada)
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Requirement already satisfied: pandas in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (2.1.0+computecanada)
+Requirement already satisfied: numpy>=1.23 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from pandas) (1.25.2+computecanada)
+Requirement already satisfied: python-dateutil>=2.8.2 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from pandas) (2.8.2+computecanada)
+Requirement already satisfied: pytz>=2020.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from pandas) (2023.3+computecanada)
+Requirement already satisfied: tzdata>=2022.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from pandas) (2023.3+computecanada)
+Requirement already satisfied: six>=1.5 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from python-dateutil>=2.8.2->pandas) (1.16.0+computecanada)
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Requirement already satisfied: tokenizers in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (0.21.0+computecanada)
+Requirement already satisfied: huggingface-hub<1.0,>=0.16.4 in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from tokenizers) (0.29.3+computecanada)
+Requirement already satisfied: filelock in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.16.4->tokenizers) (3.17.0+computecanada)
+Requirement already satisfied: fsspec>=2023.5.0 in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.16.4->tokenizers) (2025.3.0+computecanada)
+Requirement already satisfied: packaging>=20.9 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.16.4->tokenizers) (23.1+computecanada)
+Requirement already satisfied: pyyaml>=5.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.16.4->tokenizers) (6.0.1+computecanada)
+Requirement already satisfied: requests in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.16.4->tokenizers) (2.31.0+computecanada)
+Requirement already satisfied: tqdm>=4.42.1 in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.16.4->tokenizers) (4.67.1+computecanada)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from huggingface-hub<1.0,>=0.16.4->tokenizers) (4.12.2+computecanada)
+Requirement already satisfied: charset-normalizer<4,>=2 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests->huggingface-hub<1.0,>=0.16.4->tokenizers) (3.2.0+computecanada)
+Requirement already satisfied: idna<4,>=2.5 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests->huggingface-hub<1.0,>=0.16.4->tokenizers) (3.4+computecanada)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests->huggingface-hub<1.0,>=0.16.4->tokenizers) (2.0.4+computecanada)
+Requirement already satisfied: certifi>=2017.4.17 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests->huggingface-hub<1.0,>=0.16.4->tokenizers) (2023.7.22+computecanada)
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/datasets-3.1.0+computecanada-py3-none-any.whl
+Requirement already satisfied: filelock in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from datasets) (3.17.0+computecanada)
+Requirement already satisfied: numpy>=1.17 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from datasets) (1.25.2+computecanada)
+Requirement already satisfied: pyarrow>=15.0.0 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/arrow/19.0.1/lib/python3.11/site-packages (from datasets) (19.0.1)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/dill-0.3.8+computecanada-py3-none-any.whl (from datasets)
+Requirement already satisfied: pandas in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from datasets) (2.1.0+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/requests-2.32.3+computecanada-py3-none-any.whl (from datasets)
+Requirement already satisfied: tqdm>=4.66.3 in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from datasets) (4.67.1+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/xxhash-3.5.0+computecanada-cp311-cp311-linux_x86_64.whl (from datasets)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/multiprocess-0.70.16+computecanada-py3-none-any.whl (from datasets)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/fsspec-2024.9.0+computecanada-py3-none-any.whl (from datasets)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3/aiohttp-3.10.9+computecanada-cp311-cp311-linux_x86_64.whl (from datasets)
+Requirement already satisfied: huggingface-hub>=0.23.0 in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from datasets) (0.29.3+computecanada)
+Requirement already satisfied: packaging in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from datasets) (23.1+computecanada)
+Requirement already satisfied: pyyaml>=5.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from datasets) (6.0.1+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/aiohappyeyeballs-2.4.6+computecanada-py3-none-any.whl (from aiohttp->datasets)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/aiosignal-1.3.2+computecanada-py2.py3-none-any.whl (from aiohttp->datasets)
+Requirement already satisfied: attrs>=17.3.0 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from aiohttp->datasets) (23.1.0+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/frozenlist-1.5.0+computecanada-cp311-cp311-linux_x86_64.whl (from aiohttp->datasets)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/multidict-6.1.0+computecanada-cp311-cp311-linux_x86_64.whl (from aiohttp->datasets)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3/yarl-1.18.3+computecanada-cp311-cp311-linux_x86_64.whl (from aiohttp->datasets)
+Requirement already satisfied: typing-extensions>=3.7.4.3 in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from huggingface-hub>=0.23.0->datasets) (4.12.2+computecanada)
+Requirement already satisfied: charset-normalizer<4,>=2 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests>=2.32.2->datasets) (3.2.0+computecanada)
+Requirement already satisfied: idna<4,>=2.5 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests>=2.32.2->datasets) (3.4+computecanada)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests>=2.32.2->datasets) (2.0.4+computecanada)
+Requirement already satisfied: certifi>=2017.4.17 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests>=2.32.2->datasets) (2023.7.22+computecanada)
+Requirement already satisfied: python-dateutil>=2.8.2 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from pandas->datasets) (2.8.2+computecanada)
+Requirement already satisfied: pytz>=2020.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from pandas->datasets) (2023.3+computecanada)
+Requirement already satisfied: tzdata>=2022.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from pandas->datasets) (2023.3+computecanada)
+Requirement already satisfied: six>=1.5 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from python-dateutil>=2.8.2->pandas->datasets) (1.16.0+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/propcache-0.2.1+computecanada-cp311-cp311-linux_x86_64.whl (from yarl<2.0,>=1.12.0->aiohttp->datasets)
+Installing collected packages: xxhash, requests, propcache, multidict, fsspec, frozenlist, dill, aiohappyeyeballs, yarl, multiprocess, aiosignal, aiohttp, datasets
+  Attempting uninstall: requests
+    Found existing installation: requests 2.31.0+computecanada
+    Not uninstalling requests at /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages, outside environment /localscratch/rinao.54542535.0/env
+    Can't uninstall 'requests'. No files were found to uninstall.
+  Attempting uninstall: fsspec
+    Found existing installation: fsspec 2025.3.0+computecanada
+    Uninstalling fsspec-2025.3.0+computecanada:
+      Successfully uninstalled fsspec-2025.3.0+computecanada
+Successfully installed aiohappyeyeballs-2.4.6+computecanada aiohttp-3.10.9+computecanada aiosignal-1.3.2+computecanada datasets-3.1.0+computecanada dill-0.3.8+computecanada frozenlist-1.5.0+computecanada fsspec-2024.9.0+computecanada multidict-6.1.0+computecanada multiprocess-0.70.16+computecanada propcache-0.2.1+computecanada requests-2.32.3+computecanada xxhash-3.5.0+computecanada yarl-1.18.3+computecanada
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/gdown-5.2.0+computecanada-py3-none-any.whl
+Requirement already satisfied: beautifulsoup4 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from gdown) (4.12.2+computecanada)
+Requirement already satisfied: filelock in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from gdown) (3.17.0+computecanada)
+Requirement already satisfied: requests[socks] in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from gdown) (2.32.3+computecanada)
+Requirement already satisfied: tqdm in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from gdown) (4.67.1+computecanada)
+Requirement already satisfied: soupsieve>1.2 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from beautifulsoup4->gdown) (2.4.1+computecanada)
+Requirement already satisfied: charset-normalizer<4,>=2 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests[socks]->gdown) (3.2.0+computecanada)
+Requirement already satisfied: idna<4,>=2.5 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests[socks]->gdown) (3.4+computecanada)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests[socks]->gdown) (2.0.4+computecanada)
+Requirement already satisfied: certifi>=2017.4.17 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from requests[socks]->gdown) (2023.7.22+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/PySocks-1.7.1+computecanada-py3-none-any.whl (from requests[socks]->gdown)
+Installing collected packages: PySocks, gdown
+Successfully installed PySocks-1.7.1+computecanada gdown-5.2.0+computecanada
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/tensorboard-2.18.0+computecanada-py3-none-any.whl
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/absl_py-2.1.0+computecanada-py3-none-any.whl (from tensorboard)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/grpcio-1.67.0+computecanada-cp311-cp311-linux_x86_64.whl (from tensorboard)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/Markdown-3.7+computecanada-py3-none-any.whl (from tensorboard)
+Requirement already satisfied: numpy>=1.12.0 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from tensorboard) (1.25.2+computecanada)
+Requirement already satisfied: packaging in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from tensorboard) (23.1+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3/protobuf-5.29.3+computecanada-cp311-cp311-linux_x86_64.whl (from tensorboard)
+Requirement already satisfied: setuptools>=41.0.0 in /localscratch/rinao.54542535.0/env/lib/python3.11/site-packages (from tensorboard) (68.0.0)
+Requirement already satisfied: six>1.9 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/ipykernel/2023b/lib/python3.11/site-packages (from tensorboard) (1.16.0+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/tensorboard_data_server-0.7.2+computecanada-py3-none-linux_x86_64.whl (from tensorboard)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/werkzeug-3.1.3+computecanada-py3-none-any.whl (from tensorboard)
+Requirement already satisfied: MarkupSafe>=2.1.1 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from werkzeug>=1.0.1->tensorboard) (2.1.3+computecanada)
+Installing collected packages: werkzeug, tensorboard-data-server, protobuf, markdown, grpcio, absl-py, tensorboard
+Successfully installed absl-py-2.1.0+computecanada grpcio-1.67.0+computecanada markdown-3.7+computecanada protobuf-5.29.3+computecanada tensorboard-2.18.0+computecanada tensorboard-data-server-0.7.2+computecanada werkzeug-3.1.3+computecanada
+Looking in links: /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v4, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/x86-64-v3, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic, /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/gentoo2023/generic/scikit_learn-1.6.1+computecanada-cp311-cp311-linux_x86_64.whl
+Requirement already satisfied: numpy>=1.19.5 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from scikit-learn) (1.25.2+computecanada)
+Requirement already satisfied: scipy>=1.6.0 in /cvmfs/soft.computecanada.ca/easybuild/software/2023/x86-64-v4/Compiler/gcccore/scipy-stack/2023b/lib/python3.11/site-packages (from scikit-learn) (1.11.2+computecanada)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/joblib-1.4.2+computecanada-py3-none-any.whl (from scikit-learn)
+Processing /cvmfs/soft.computecanada.ca/custom/python/wheelhouse/generic/threadpoolctl-3.5.0+computecanada-py3-none-any.whl (from scikit-learn)
+Installing collected packages: threadpoolctl, joblib, scikit-learn
+Successfully installed joblib-1.4.2+computecanada scikit-learn-1.6.1+computecanada threadpoolctl-3.5.0+computecanada
