@@ -68,7 +68,7 @@ class TextDataset(Dataset):
 
         #     sources = data["source"]
         #     labels = data["target"]
-        # elif file_type == "test":
+        elif file_type == "test":
             test_df = pd.read_csv("../data/cvefixes_bigvul/test.csv")
             sources = test_df["source"].tolist()
             labels = test_df["target"].tolist()
