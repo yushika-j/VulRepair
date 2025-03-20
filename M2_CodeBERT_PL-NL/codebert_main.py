@@ -58,10 +58,14 @@ class TextDataset(Dataset):
         elif file_type == "eval":
             sources = val_data["source"].tolist()
             labels = val_data["target"].tolist()
+        # elif file_type == "test":
+        #     data = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="test")
+        #     sources = data["source"]
+        #     labels = data["target"]
         elif file_type == "test":
-            data = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="test")
-            sources = data["source"]
-            labels = data["target"]
+            test_df = pd.read_csv("../data/cvefixes_bigvul/test.csv")
+            sources = test_df["source"].tolist()
+            labels = test_df["target"].tolist()
         self.examples = []
         for i in tqdm(range(len(sources))):
             self.examples.append(convert_examples_to_features(sources[i], labels[i], tokenizer, args))
