@@ -368,8 +368,8 @@ def main():
     # Training
     if args.do_train:
         #train_data_whole = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="train")
-	train_data_whole = datasets.load_dataset("json", data_files="./data/cvefixes_bigvul/train.json", split="train")
-	df = pd.DataFrame({"source": train_data_whole["source"], "target": train_data_whole["target"]})
+        train_data_whole = datasets.load_dataset("json", data_files="./data/cvefixes_bigvul/train.json", split="train")
+        df = pd.DataFrame({"source": train_data_whole["source"], "target": train_data_whole["target"]})
         train_data, val_data = train_test_split(df, test_size=0.1238)
         train_dataset = TextDataset(tokenizer, args, train_data, val_data, file_type='train')
         eval_dataset = TextDataset(tokenizer, args, train_data, val_data, file_type='eval')
