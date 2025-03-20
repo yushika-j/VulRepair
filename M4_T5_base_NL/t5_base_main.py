@@ -24,9 +24,9 @@ import pickle
 import random
 import re
 import numpy as np
-from seaborn import load_dataset
 import torch
 import pandas as pd
+import datasets
 from datasets import Dataset
 from torch.utils.data import DataLoader, Dataset, SequentialSampler, RandomSampler,TensorDataset
 from torch.utils.data.distributed import DistributedSampler
@@ -65,7 +65,7 @@ class TextDataset(Dataset):
         elif file_type == "test":
             #data = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="test")
             data = datasets.load_dataset("/lustre04/scratch/rinao/VulRepair/cvefixes_bigvul/test.csv") 
-            data = load_dataset("/lustre04/scratch/rinao/VulRepair/cvefixes_bigvul/test.csv") 
+
             sources = data["source"]
             labels = data["target"]
         self.examples = []
@@ -388,11 +388,8 @@ def main():
     # Training
     if args.do_train:
         #train_data_whole = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="train")
-        # train_df = pd.read_csv("/lustre04/scratch/rinao/VulRepair/cvefixes_bigvul/train.csv")
-        # train_data_whole = Dataset.from_pandas(train_df)
-        #train_data_whole = datasets.load_dataset("/lustre04/scratch/rinao/VulRepair/cvefixes_bigvul/train.csv")
-        train_data_whole = load_dataset("csv", data_files="/lustre04/scratch/rinao/VulRepair/cvefixes_bigvul/train.csv")
-
+        train_df = pd.read_csv("/lustre04/scratch/rinao/VulRepair/cvefixes_bigvul/train.csv")
+        train_data_whole = Dataset.from_pandas(train_df)
                 
         df = pd.DataFrame({"source": train_data_whole["source"], "target": train_data_whole["target"]})
         train_data, val_data = train_test_split(df, test_size=0.1238)
