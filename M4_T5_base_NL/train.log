@@ -1,11 +1,4 @@
-03/20/2025 04:23:47 - WARNING - __main__ -   device: cuda:0, n_gpu: 1
-You are using the default legacy behaviour of the <class 'transformers.models.t5.tokenization_t5.T5Tokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565
-03/20/2025 04:24:00 - INFO - __main__ -   Training/evaluation parameters Namespace(output_dir='./saved_models', model_type='t5', encoder_block_size=512, decoder_block_size=256, num_beams=50, model_name='model.bin', checkpoint_model_name='non_domain_model.bin', model_name_or_path='../t5-base-model', config_name='', use_non_pretrained_model=False, tokenizer_name='../t5-base-model', code_length=256, do_train=True, do_eval=False, do_test=False, load_model_from_checkpoint=False, evaluate_during_training=True, do_local_explanation=False, reasoning_method=None, train_batch_size=4, eval_batch_size=4, gradient_accumulation_steps=1, learning_rate=2e-05, weight_decay=0.0, adam_epsilon=1e-08, max_grad_norm=1.0, max_steps=-1, warmup_steps=0, seed=123456, epochs=75, n_gpu=1, device=device(type='cuda', index=0))
-3.4.1
 Traceback (most recent call last):
-  File "/lustre04/scratch/rinao/VulRepair/M4_T5_base_NL/t5_base_main.py", line 409, in <module>
-    main()
-  File "/lustre04/scratch/rinao/VulRepair/M4_T5_base_NL/t5_base_main.py", line 390, in main
-    train_data_whole = Dataset.from_pandas(train_df)
-                       ^^^^^^^^^^^^^^^^^^^
-AttributeError: type object 'Dataset' has no attribute 'from_pandas'
+  File "/lustre04/scratch/rinao/VulRepair/M4_T5_base_NL/t5_base_main.py", line 27, in <module>
+    from seaborn import load_dataset
+ModuleNotFoundError: No module named 'seaborn'
