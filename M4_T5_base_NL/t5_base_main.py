@@ -391,16 +391,13 @@ def main():
     logger.info("Training/evaluation parameters %s", args)
     # Training
     if args.do_train:
-        #train_data_whole = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="train")
-        # train_df = pd.read_csv("/lustre04/scratch/rinao/VulRepair/cvefixes_bigvul/train.csv")
-        train_df = pd.read_csv("../data/cvefixes_bigvul/train.csv")
-        train_data_whole = Dataset.from_pandas(train_df)
-                
+        train_data_whole = datasets.load_dataset("csv", data_files="../data/cvefixes_bigvul/train.csv", split="train")
         df = pd.DataFrame({"source": train_data_whole["source"], "target": train_data_whole["target"]})
         train_data, val_data = train_test_split(df, test_size=0.1238)
         train_dataset = TextDataset(tokenizer, args, train_data, val_data, file_type='train')
         eval_dataset = TextDataset(tokenizer, args, train_data, val_data, file_type='eval')
         train(args, train_dataset, model, tokenizer, eval_dataset)
+        
     # Evaluation
     results = {}  
     if args.do_test:
