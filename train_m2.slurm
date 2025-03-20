@@ -31,8 +31,8 @@ cd M2_CodeBERT_PL-NL
 python codebert_main.py \
     --output_dir=./saved_models \
     --model_name=model.bin \
-    --tokenizer_name=microsoft/codebert-base \
-    --model_name_or_path=microsoft/codebert-base \
+    --tokenizer_name=../codebert-base \
+    --model_name_or_path=../codebert-base \
     --do_train \
     --epochs 75 \
     --encoder_block_size 512 \

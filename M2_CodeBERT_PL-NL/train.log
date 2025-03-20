@@ -1,3 +1,29 @@
-  File "/lustre04/scratch/rinao/VulRepair/M2_CodeBERT_PL-NL/codebert_main.py", line 371
+03/20/2025 01:43:36 - WARNING - __main__ -   device: cuda:0, n_gpu: 1
+The new embeddings will be initialized from a multivariate normal distribution that has old embeddings' mean and covariance. As described in this article: https://nlp.stanford.edu/~johnhew/vocab-expansion.html. To disable this, use `mean_resizing=False`
+03/20/2025 01:43:40 - INFO - __main__ -   Training/evaluation parameters Namespace(output_dir='./saved_models', model_type='t5', encoder_block_size=512, decoder_block_size=256, beam_size=50, model_name='model.bin', checkpoint_model_name='non_domain_model.bin', model_name_or_path='../codebert-base', config_name='', use_non_pretrained_model=False, tokenizer_name='../codebert-base', code_length=256, do_train=True, do_eval=False, do_test=False, load_model_from_checkpoint=False, evaluate_during_training=True, do_local_explanation=False, reasoning_method=None, train_batch_size=4, eval_batch_size=4, gradient_accumulation_steps=1, learning_rate=2e-05, weight_decay=0.0, adam_epsilon=1e-08, max_grad_norm=1.0, max_steps=-1, warmup_steps=0, seed=123456, epochs=75, n_gpu=1, device=device(type='cuda', index=0))
+Traceback (most recent call last):
+  File "/lustre04/scratch/rinao/VulRepair/M2_CodeBERT_PL-NL/codebert_main.py", line 389, in <module>
+    main()
+  File "/lustre04/scratch/rinao/VulRepair/M2_CodeBERT_PL-NL/codebert_main.py", line 371, in main
     train_data_whole = datasets.load_dataset("json", data_files="./data/cvefixes_bigvul/train.json", split="train")
-TabError: inconsistent use of tabs and spaces in indentation
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/localscratch/rinao.54667215.0/env/lib/python3.11/site-packages/datasets/load.py", line 2061, in load_dataset
+    builder_instance = load_dataset_builder(
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/localscratch/rinao.54667215.0/env/lib/python3.11/site-packages/datasets/load.py", line 1781, in load_dataset_builder
+    dataset_module = dataset_module_factory(
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/localscratch/rinao.54667215.0/env/lib/python3.11/site-packages/datasets/load.py", line 1496, in dataset_module_factory
+    ).get_module()
+      ^^^^^^^^^^^^
+  File "/localscratch/rinao.54667215.0/env/lib/python3.11/site-packages/datasets/load.py", line 912, in get_module
+    data_files = DataFilesDict.from_patterns(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/localscratch/rinao.54667215.0/env/lib/python3.11/site-packages/datasets/data_files.py", line 690, in from_patterns
+    else DataFilesList.from_patterns(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/localscratch/rinao.54667215.0/env/lib/python3.11/site-packages/datasets/data_files.py", line 583, in from_patterns
+    resolve_pattern(
+  File "/localscratch/rinao.54667215.0/env/lib/python3.11/site-packages/datasets/data_files.py", line 384, in resolve_pattern
+    raise FileNotFoundError(error_msg)
+FileNotFoundError: Unable to find '/lustre04/scratch/rinao/VulRepair/M2_CodeBERT_PL-NL/./data/cvefixes_bigvul/train.json'
