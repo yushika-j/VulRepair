@@ -2,9 +2,9 @@
 #SBATCH --job-name=m4_train         # Job name
 #SBATCH --gres=gpu:1                # Request 1 GPU
 #SBATCH --mem=32G                    # Request 32GB of memory
-#SBATCH --output=m4_train-V2.log        # Standard output file
-#SBATCH --error=m4_train_error-V2.txt   # Standard error file
-#SBATCH --time=10:00:00              # Max job time
+#SBATCH --output=m4_train-12h.log        # Standard output file
+#SBATCH --error=m4_train_error-12h.txt   # Standard error file
+#SBATCH --time=12:00:00              # Max job time
 #SBATCH --cpus-per-task=4            # CPU cores per task
 #SBATCH --mail-user=rosma012@uottawa.ca  # Email for job updates
 
@@ -28,7 +28,7 @@ pip install sentencepiece --no-index
 
 cd M4_T5_base_NL
 python t5_base_main.py \
-    --model_name=model.bin \
+    --model_name=model4-12h.bin \
     --output_dir=./saved_models \
     --tokenizer_name=../t5-base-model \
     --model_name_or_path=../t5-base-model \
