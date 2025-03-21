@@ -2,8 +2,8 @@
 #SBATCH --job-name=m10_train         # Job name
 #SBATCH --gres=gpu:1                # Request 1 GPU
 #SBATCH --mem=32G                    # Request 32GB of memory
-#SBATCH --output=train_m10.log        # Standard output file
-#SBATCH --error=train_error_m10.txt   # Standard error file
+#SBATCH --output=m10_train.log        # Standard output file
+#SBATCH --error=m10_train_error.txt   # Standard error file
 #SBATCH --time=12:00:00              # Max job time
 #SBATCH --cpus-per-task=4            # CPU cores per task
 #SBATCH --mail-user=rosma012@uottawa.ca  # Email for job updates
