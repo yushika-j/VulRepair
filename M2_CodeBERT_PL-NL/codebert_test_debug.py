@@ -286,9 +286,12 @@ def test(args, model, tokenizer, test_dataset, best_threshold=0.5):
     logger.info(f"Test Accuracy: {str(test_result)}")
 
 def test_debug(args, model, tokenizer, test_dataset, sample_size=3):
-    test_dataloader = DataLoader(test_dataset, sampler=SequentialSampler(test_dataset),
-                                 batch_size=1, num_workers=0)
+    # test_dataloader = DataLoader(test_dataset, sampler=SequentialSampler(test_dataset),batch_size=1, num_workers=0)
 
+    ## CHANGED TO RANDOM SAMPLING ##
+    test_dataloader = DataLoader(test_dataset, sampler=RandomSampler(test_dataset), batch_size=1, num_workers=0)
+    ###
+    
     model.eval()
     logger.info("***** Debugging Inference on Small Sample *****")
 
