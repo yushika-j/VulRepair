@@ -81,7 +81,12 @@ class TextDataset(Dataset):
             labels = test_df["target"].tolist()
         self.examples = []
         for i in tqdm(range(len(sources))):
-            self.examples.append(convert_examples_to_features(sources[i], labels[i], tokenizer, args))
+            #self.examples.append(convert_examples_to_features(sources[i], labels[i], tokenizer, args))
+            feature = convert_examples_to_features(sources[i], labels[i], tokenizer, args)
+            # STORE INDEX
+            feature.index = i  # Attach index
+            self.examples.append(feature)
+    
         if file_type == "train":
             for example in self.examples[:3]:
                     logger.info("*** Example ***")
@@ -93,7 +98,8 @@ class TextDataset(Dataset):
         return len(self.examples)
 
     def __getitem__(self, i):       
-        return self.examples[i].input_ids, self.examples[i].input_ids.ne(1), self.examples[i].label, self.examples[i].decoder_input_ids, self.examples[i].decoder_input_ids.ne(1)
+        return self.examples[i].input_ids, self.examples[i].input_ids.ne(1), self.examples[i].label, self.examples[i].decoder_input_ids, self.examples[i].decoder_input_ids.ne(1), self.examples[i].index
+        # added self.examples[i].index
 
 def convert_examples_to_features(source, label, tokenizer, args):
     # encode
@@ -300,7 +306,8 @@ def test_debug(args, model, tokenizer, test_dataset, sample_size=3):
         if count >= sample_size:
             break
 
-        (input_ids, attention_mask, labels, decoder_input_ids, target_mask) = [x.squeeze(1).to(args.device) for x in batch]
+        # added index
+        (input_ids, attention_mask, labels, decoder_input_ids, target_mask, index) = [x.squeeze(1).to(args.device) for x in batch]
         with torch.no_grad():
             beam_outputs = model(source_ids=input_ids, source_mask=attention_mask)
             beam_outputs = beam_outputs.detach().cpu().tolist()[0]
@@ -315,7 +322,10 @@ def test_debug(args, model, tokenizer, test_dataset, sample_size=3):
             ground_truth_clean = clean_tokens(ground_truth)
 
             logger.info("="*60)
-            logger.info(f"Sample #{count + 1}")
+            #logger.info(f"Sample #{count + 1}")
+            
+            # added row index
+            logger.info(f"Sample #{count + 1} (Dataset Row #{index.item()})")
             logger.info(f"Correct Prediction? {'✅ YES' if prediction_clean == ground_truth_clean else '❌ NO'}")
             logger.info(f"\n🔹 Input IDs:\n{input_ids[0].tolist()}")
             logger.info(f"\n🔹 Input Tokens:\n{tokenizer.decode(input_ids[0], skip_special_tokens=False)}")
