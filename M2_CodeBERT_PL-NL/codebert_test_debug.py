@@ -39,6 +39,19 @@ from sklearn.model_selection import train_test_split
 cpu_cont = 16
 logger = logging.getLogger(__name__)
 
+#### CHANGES ####
+def get_next_run_filename(base_path, prefix="m2_test_debug_run_", extension=".txt"):
+    existing_files = os.listdir(base_path)
+    run_nums = []
+    pattern = re.compile(f"{re.escape(prefix)}(\\d+){re.escape(extension)}")
+    for file in existing_files:
+        match = pattern.match(file)
+        if match:
+            run_nums.append(int(match.group(1)))
+    next_run = max(run_nums) + 1 if run_nums else 1
+    return os.path.join(base_path, f"{prefix}{next_run}{extension}")
+#### CHANGES ####
+
 class InputFeatures(object):
     """A single training/test features for a example."""
     def __init__(self,
@@ -393,6 +406,14 @@ def main():
     # Setup logging
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s',datefmt='%m/%d/%Y %H:%M:%S',level=logging.INFO)
     logger.warning("device: %s, n_gpu: %s",device, args.n_gpu,)
+    
+    #### CHANGES ####
+    output_txt_path = get_next_run_filename(".", prefix="m2_test_debug_run_", extension=".txt")
+    file_handler = logging.FileHandler(output_txt_path)
+    file_handler.setLevel(logging.INFO)
+    logger.addHandler(file_handler)
+    #### CHANGES ####
+    
     # Set seed
     set_seed(args)
 
