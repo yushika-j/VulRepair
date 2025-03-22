@@ -425,6 +425,7 @@ def main():
     file_handler = logging.FileHandler(output_txt_path)
     file_handler.setLevel(logging.INFO)
     logger.addHandler(file_handler)
+    logging.getLogger().addHandler(file_handler)
     #### CHANGES ####
     
     # Set seed
