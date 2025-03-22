@@ -2,8 +2,8 @@
 #SBATCH --job-name=m10_inference                        # Job name
 #SBATCH --gres=gpu:1                                    # Request 1 GPU
 #SBATCH --mem=32G                                       # Request 32GB of memory
-#SBATCH --output=m10-results/inference_m10.log          # Standard output file
-#SBATCH --error=m10-results/inference_error_m10.txt     # Standard error file
+#SBATCH --output=results_m10/inference_m10.log          # Standard output file
+#SBATCH --error=results_m10/inference_error_m10.txt     # Standard error file
 #SBATCH --time=07:00:00                                 # Max job time
 #SBATCH --cpus-per-task=4                               # CPU cores per task
 #SBATCH --mail-user=rosma012@uottawa.ca                 # Email for job updates
