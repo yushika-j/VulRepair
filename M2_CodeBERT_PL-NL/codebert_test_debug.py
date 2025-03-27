@@ -84,7 +84,7 @@ class TextDataset(Dataset):
             #self.examples.append(convert_examples_to_features(sources[i], labels[i], tokenizer, args))
             feature = convert_examples_to_features(sources[i], labels[i], tokenizer, args)
             # STORE INDEX
-            feature.index = i  # Attach index
+            #feature.index = i  # Attach index
             self.examples.append(feature)
     
         if file_type == "train":
@@ -98,7 +98,8 @@ class TextDataset(Dataset):
         return len(self.examples)
 
     def __getitem__(self, i):       
-        return self.examples[i].input_ids, self.examples[i].input_ids.ne(1), self.examples[i].label, self.examples[i].decoder_input_ids, self.examples[i].decoder_input_ids.ne(1), self.examples[i].index
+        # return self.examples[i].input_ids, self.examples[i].input_ids.ne(1), self.examples[i].label, self.examples[i].decoder_input_ids, self.examples[i].decoder_input_ids.ne(1), self.examples[i].index
+        return self.examples[i].input_ids, self.examples[i].input_ids.ne(1), self.examples[i].label, self.examples[i].decoder_input_ids, self.examples[i].decoder_input_ids.ne(1)
         # added self.examples[i].index
 
 def convert_examples_to_features(source, label, tokenizer, args):
@@ -307,7 +308,8 @@ def test_debug(args, model, tokenizer, test_dataset, sample_size=3):
             break
 
         # added index
-        (input_ids, attention_mask, labels, decoder_input_ids, target_mask, index) = [x.squeeze(1).to(args.device) for x in batch]
+        # (input_ids, attention_mask, labels, decoder_input_ids, target_mask, index) = [x.squeeze(1).to(args.device) for x in batch]
+        (input_ids, attention_mask, labels, decoder_input_ids, target_mask) = [x.squeeze(1).to(args.device) for x in batch]
         with torch.no_grad():
             beam_outputs = model(source_ids=input_ids, source_mask=attention_mask)
             beam_outputs = beam_outputs.detach().cpu().tolist()[0]
@@ -325,7 +327,8 @@ def test_debug(args, model, tokenizer, test_dataset, sample_size=3):
             #logger.info(f"Sample #{count + 1}")
             
             # added row index
-            logger.info(f"Sample #{count + 1} (Dataset Row #{index.item()})")
+            # logger.info(f"Sample #{count + 1} (Dataset Row #{index.item()})")
+            
             logger.info(f"Correct Prediction? {'✅ YES' if prediction_clean == ground_truth_clean else '❌ NO'}")
             logger.info(f"\n🔹 Input IDs:\n{input_ids[0].tolist()}")
             logger.info(f"\n🔹 Input Tokens:\n{tokenizer.decode(input_ids[0], skip_special_tokens=False)}")
