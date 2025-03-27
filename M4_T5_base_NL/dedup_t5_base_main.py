@@ -17,19 +17,29 @@
 
 from __future__ import absolute_import, division, print_function
 import argparse
+import glob
 import logging
 import os
+import pickle
 import random
+import re
 import numpy as np
 import torch
-from torch.utils.data import DataLoader, Dataset, SequentialSampler, RandomSampler
+import pandas as pd
+import datasets
+from datasets import Dataset
+from torch.utils.data import DataLoader, Dataset, SequentialSampler, RandomSampler,TensorDataset
+from torch.utils.data.distributed import DistributedSampler
 from torch.optim import AdamW
-from transformers import (get_linear_schedule_with_warmup, 
-                          T5ForConditionalGeneration, T5Config)
+from transformers import (WEIGHTS_NAME, get_linear_schedule_with_warmup, get_constant_schedule, 
+                          T5ForConditionalGeneration, RobertaTokenizer, AutoTokenizer, T5Tokenizer, FlaxT5ForConditionalGeneration)
+from transformers.optimization import Adafactor, AdafactorSchedule
 from tqdm import tqdm
+import multiprocessing
 import pandas as pd
 from torch.utils.tensorboard import SummaryWriter
-from tokenizers import Tokenizer
+import datasets
+from sklearn.model_selection import train_test_split
 
 cpu_cont = 16
 logger = logging.getLogger(__name__)
@@ -46,17 +56,25 @@ class InputFeatures(object):
         
 
 class TextDataset(Dataset):
-    def __init__(self, tokenizer, args, file_type="train"):
+    def __init__(self, tokenizer, args, train_data=None, val_data=None, file_type="train"):
         if file_type == "train":
-            file_path = args.train_data_file
+            sources = train_data["source"].tolist()
+            labels = train_data["target"].tolist()
         elif file_type == "eval":
-            file_path = args.eval_data_file
+            sources = val_data["source"].tolist()
+            labels = val_data["target"].tolist()
+        # elif file_type == "test":
+            #data = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="test")
+        #     data = datasets.load_dataset("/lustre04/scratch/rinao/VulRepair/cvefixes_bigvul/test.csv") 
+
+        #     sources = data["source"]
+        #     labels = data["target"]
         elif file_type == "test":
-            file_path = args.test_data_file
+            # test_df = pd.read_csv("../data/cvefixes_bigvul/test.csv")
+            test_df = pd.read_csv("../data/cleaned_test.csv")
+            sources = test_df["source"].tolist()
+            labels = test_df["target"].tolist()
         self.examples = []
-        df = pd.read_csv(file_path)
-        sources = df["source"].tolist()
-        labels = df["target"].tolist()
         for i in tqdm(range(len(sources))):
             self.examples.append(convert_examples_to_features(sources[i], labels[i], tokenizer, args))
         if file_type == "train":
@@ -75,36 +93,9 @@ class TextDataset(Dataset):
 
 def convert_examples_to_features(source, label, tokenizer, args):
     # encode
-    source_ids = tokenizer.encode(source)
-    source_ids = source_ids.ids
-    if len(source_ids) > 510:
-        source_ids = source_ids[:510]
-        source_ids = [1] + source_ids + [2]
-    elif len(source_ids) < 510:
-        padding = 510 - len(source_ids)
-        source_ids = [1] + source_ids + [2]
-        for _ in range(padding):
-            source_ids.append(0)
-    elif len(source_ids) == 510:
-        source_ids = [1] + source_ids + [2]
-    source_ids = torch.tensor(source_ids)
-    
-    decoder_input_ids = tokenizer.encode(label)
-    decoder_input_ids = decoder_input_ids.ids
-    if len(decoder_input_ids) > 254:
-        decoder_input_ids = decoder_input_ids[:254]
-        decoder_input_ids = [1] + decoder_input_ids + [2]
-    elif len(decoder_input_ids) < 254:
-        padding = 254 - len(decoder_input_ids)
-        decoder_input_ids = [1] + decoder_input_ids + [2]
-        for _ in range(padding):
-            decoder_input_ids.append(0)
-    elif len(decoder_input_ids) == 254:
-        decoder_input_ids = [1] + decoder_input_ids + [2]
-
-    assert len(decoder_input_ids) == 256 and len(source_ids) == 512
-    decoder_input_ids = torch.tensor(decoder_input_ids)
-    label = decoder_input_ids
+    source_ids = tokenizer.encode(source, truncation=True, max_length=args.encoder_block_size, padding='max_length', return_tensors='pt')
+    decoder_input_ids = tokenizer.encode(label, truncation=True, max_length=args.decoder_block_size, padding='max_length', return_tensors='pt')
+    label = tokenizer.encode(label, truncation=True, max_length=args.decoder_block_size, padding='max_length', return_tensors='pt')
     return InputFeatures(source_ids, label, decoder_input_ids)
 
 def set_seed(args):
@@ -211,9 +202,9 @@ def train(args, train_dataset, model, tokenizer, eval_dataset):
                         logger.info("Saving model checkpoint to %s", output_dir)
 
 def clean_tokens(tokens):
-    tokens = tokens.replace("[PAD]", "")
-    tokens = tokens.replace("[CLS]", "")
-    tokens = tokens.replace("[SEP]", "")
+    tokens = tokens.replace("<pad>", "")
+    tokens = tokens.replace("<s>", "")
+    tokens = tokens.replace("</s>", "")
     tokens = tokens.strip("\n")
     tokens = tokens.strip()
     return tokens
@@ -307,16 +298,16 @@ def test(args, model, tokenizer, test_dataset, best_threshold=0.5):
     df["correctly_predicted"] = accuracy
     f_name = args.test_data_file.split("/")[-1].split("_")[:2]
     f_name = "_".join(f_name)
-    df.to_csv(f"../data/raw_predictions/T5-no-pretraining/{f_name}_raw_preds.csv")
+    df.to_csv(f"../data/raw_predictions/T5-base/{f_name}_raw_preds.csv")
 
 
 def main():
+    print(datasets.__version__)
     parser = argparse.ArgumentParser()
     # Params
-    parser.add_argument("--train_data_file", default=None, type=str, required=False,
-                        help="The input training data file (a csv file).")
     parser.add_argument("--output_dir", default=None, type=str, required=False,
                         help="The output directory where the model predictions and checkpoints will be written.")
+    ## Other parameters
     parser.add_argument("--model_type", default="t5", type=str,
                         help="The model architecture to be fine-tuned.")
     parser.add_argument("--encoder_block_size", default=-1, type=int,
@@ -329,10 +320,6 @@ def main():
                              "Default to the model max input length for single sentence inputs (take into account special tokens).")
     parser.add_argument("--num_beams", default=50, type=int,
                         help="Beam size to use when decoding.")                          
-    parser.add_argument("--eval_data_file", default=None, type=str,
-                        help="An optional input evaluation data file to evaluate the perplexity on (a text file).")
-    parser.add_argument("--test_data_file", default=None, type=str,
-                        help="An optional input evaluation data file to evaluate the perplexity on (a text file).")
     parser.add_argument("--model_name", default="model.bin", type=str,
                         help="Saved model name.")
     parser.add_argument("--checkpoint_model_name", default="non_domain_model.bin", type=str,
@@ -341,8 +328,12 @@ def main():
                         help="The model checkpoint for weights initialization.")
     parser.add_argument("--config_name", default="", type=str,
                         help="Optional pretrained config name or path if not the same as model_name_or_path")
+    parser.add_argument("--use_non_pretrained_model", action='store_true', default=False,
+                        help="Whether to use non-pretrained model.")
     parser.add_argument("--tokenizer_name", default="", type=str,
                         help="Optional pretrained tokenizer name or path if not the same as model_name_or_path")
+    parser.add_argument("--code_length", default=256, type=int,
+                        help="Optional Code input sequence length after tokenization.") 
 
     parser.add_argument("--do_train", action='store_true',
                         help="Whether to run training.")
@@ -352,8 +343,13 @@ def main():
                         help="Whether to run eval on the dev set.")
     parser.add_argument("--load_model_from_checkpoint", default=False, action='store_true',
                         help="Whether to load model from checkpoint.")
+
     parser.add_argument("--evaluate_during_training", action='store_true',
                         help="Run evaluation during training at each logging step.")
+    parser.add_argument("--do_local_explanation", default=False, action='store_true',
+                        help="Whether to do local explanation. ") 
+    parser.add_argument("--reasoning_method", default=None, type=str,
+                        help="Should be one of 'attention', 'shap', 'lime', 'lig'")
 
     parser.add_argument("--train_batch_size", default=4, type=int,
                         help="Batch size per GPU/CPU for training.")
@@ -389,38 +385,24 @@ def main():
     # Set seed
     set_seed(args)
 
-    tokenizer = Tokenizer.from_file('./wordlevel_tokenizer/wordlevel.json') 
-    
-    #config = T5Config.from_pretrained("t5-base")
-    #config.decoder_start_token_id = config.pad_token_id
-    #config = T5Config.from_pretrained(args.config_name)
-    #model = T5ForConditionalGeneration(config=config)    
-    #model = T5ForConditionalGeneration(config)
-    config = T5Config.from_pretrained("/scratch/rinao/VulRepair/t5-base-model")
-    #model = T5ForConditionalGeneration.from_pretrained("/scratch/rinao/VulRepair/t5-base")
-    model = T5ForConditionalGeneration.from_pretrained("/scratch/rinao/VulRepair/t5-base-model")
-    model.resize_token_embeddings(32100)
+    tokenizer = T5Tokenizer.from_pretrained(args.tokenizer_name)
+    tokenizer.add_tokens(["<S2SV_StartBug>", "<S2SV_EndBug>", "<S2SV_blank>", "<S2SV_ModStart>", "<S2SV_ModEnd>"])
+    model = T5ForConditionalGeneration.from_pretrained(args.model_name_or_path) #  from_flax=True 
+    model.resize_token_embeddings(len(tokenizer))
     
     logger.info("Training/evaluation parameters %s", args)
     # Training
     if args.do_train:
-        train_dataset = TextDataset(tokenizer, args, file_type='train')
-        eval_dataset = TextDataset(tokenizer, args, file_type='eval')
-        if args.load_model_from_checkpoint:
-            checkpoint_prefix = f'checkpoint-best-loss/{args.checkpoint_model_name}'
-            output_dir = os.path.join(args.output_dir, '{}'.format(checkpoint_prefix))  
-            model.load_state_dict(torch.load(output_dir))
-            model.to(args.device)
+        # train_data_whole = datasets.load_dataset("csv", data_files="../data/cvefixes_bigvul/train.csv", split="train")
+        train_data_whole = datasets.load_dataset("csv", data_files="../data/cleaned_train.csv", split="train")
+        df = pd.DataFrame({"source": train_data_whole["source"], "target": train_data_whole["target"]})
+        train_data, val_data = train_test_split(df, test_size=0.1238)
+        train_dataset = TextDataset(tokenizer, args, train_data, val_data, file_type='train')
+        eval_dataset = TextDataset(tokenizer, args, train_data, val_data, file_type='eval')
         train(args, train_dataset, model, tokenizer, eval_dataset)
+        
     # Evaluation
-    results = {}
-    if args.do_eval:
-        checkpoint_prefix = f'checkpoint-best-loss/{args.model_name}'
-        output_dir = os.path.join(args.output_dir, '{}'.format(checkpoint_prefix))  
-        model.load_state_dict(torch.load(output_dir))
-        model.to(args.device)
-        eval_dataset = TextDataset(tokenizer, args, file_type='eval')
-        result=evaluate(args, model, tokenizer, eval_dataset)   
+    results = {}  
     if args.do_test:
         checkpoint_prefix = f'checkpoint-best-loss/{args.model_name}'
         output_dir = os.path.join(args.output_dir, '{}'.format(checkpoint_prefix))  
