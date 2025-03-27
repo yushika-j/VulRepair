@@ -26,7 +26,7 @@ pip install scikit-learn --no-index
 
 cd M10_T5_no_pretrain_word_level
 
-python t5_no_pretraining_wordlevel_main.py \
+python dedup_t5_no_pretraining_wordlevel_main.py \
     --model_name=model.bin \
     --output_dir=./saved_models \
     --config_name=../t5-base \
