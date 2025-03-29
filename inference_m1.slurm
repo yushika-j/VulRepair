@@ -1,9 +1,9 @@
 #!/bin/bash
-#SBATCH --job-name=m2_inference                      # Job name
+#SBATCH --job-name=m1_inference                      # Job name
 #SBATCH --gres=gpu:1                                 # Request 1 GPU
 #SBATCH --mem=32G                                    # Request 32GB of memory
-#SBATCH --output=results_m2/inference_m2.log         # Standard output file
-#SBATCH --error=results_m2/inference_error_m2.txt    # Standard error file
+#SBATCH --output=results_m1/inference_m1.log         # Standard output file
+#SBATCH --error=results_m1/inference_error_m1.txt    # Standard error file
 #SBATCH --time=00:15:00                              # Max job time
 #SBATCH --cpus-per-task=4                            # CPU cores per task
 #SBATCH --mail-user=rosma012@uottawa.ca              # Email for job updates
