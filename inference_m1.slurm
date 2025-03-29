@@ -4,7 +4,7 @@
 #SBATCH --mem=32G                                    # Request 32GB of memory
 #SBATCH --output=results_m1/inference_m1.log         # Standard output file
 #SBATCH --error=results_m1/inference_error_m1.txt    # Standard error file
-#SBATCH --time=00:15:00                              # Max job time
+#SBATCH --time=09:15:00                              # Max job time
 #SBATCH --cpus-per-task=4                            # CPU cores per task
 #SBATCH --mail-user=rosma012@uottawa.ca              # Email for job updates
 
