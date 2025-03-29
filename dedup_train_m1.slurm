@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=m1_train                            # Job name
+#SBATCH --job-name=dedup_m1_train                            # Job name
 #SBATCH --gres=gpu:1                                   # Request 1 GPU
 #SBATCH --mem=32G                                      # Request 32GB of memory
 #SBATCH --output=dedup_results_m1/m1_train.log               # Standard output file

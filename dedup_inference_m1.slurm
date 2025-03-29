@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=m2_inference                      # Job name
+#SBATCH --job-name=dedup_m2_inference                      # Job name
 #SBATCH --gres=gpu:1                                 # Request 1 GPU
 #SBATCH --mem=32G                                    # Request 32GB of memory
 #SBATCH --output=dedup_results_m2/inference_m2.log         # Standard output file
