@@ -328,6 +328,8 @@ def main():
                         help="The model checkpoint for weights initialization.")
     parser.add_argument("--config_name", default="", type=str,
                         help="Optional pretrained config name or path if not the same as model_name_or_path")
+    parser.add_argument("--test_data_file", default="../data/cleaned_test.csv", type=str,
+                    help="Path to the test data CSV file.")
     parser.add_argument("--use_non_pretrained_model", action='store_true', default=False,
                         help="Whether to use non-pretrained model.")
     parser.add_argument("--tokenizer_name", default="", type=str,

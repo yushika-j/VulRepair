@@ -31,6 +31,7 @@ cd M4_T5_base_NL
 # testing script
 python dedup_t5_base_main.py \
     --output_dir=./saved_models \
+    --test_data_file../data/cleaned_test.csv \
     --model_name=model.bin \
     --tokenizer_name=../t5-base-model \
     --model_name_or_path=../t5-base-model \
