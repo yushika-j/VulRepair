@@ -22,7 +22,8 @@ import random
 import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset, SequentialSampler, RandomSampler
-from transformers import (AdamW, get_linear_schedule_with_warmup, 
+from torch.optim import AdamW
+from transformers import (get_linear_schedule_with_warmup, 
                           T5ForConditionalGeneration, RobertaTokenizer)
 from tqdm import tqdm
 import pandas as pd
@@ -53,10 +54,14 @@ class TextDataset(Dataset):
         elif file_type == "eval":
             sources = val_data["source"].tolist()
             labels = val_data["target"].tolist()
+        # elif file_type == "test":
+        #     data = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="test")
+        #     sources = data["source"]
+        #     labels = data["target"]
         elif file_type == "test":
-            data = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="test")
-            sources = data["source"]
-            labels = data["target"]
+            test_df = pd.read_csv("../data/cvefixes_bigvul/test.csv")
+            sources = test_df["source"].tolist()
+            labels = test_df["target"].tolist()
         self.examples = []
         for i in tqdm(range(len(sources))):
             self.examples.append(convert_examples_to_features(sources[i], labels[i], tokenizer, args))
@@ -360,7 +365,8 @@ def main():
     logger.info("Training/evaluation parameters %s", args)
     # Training
     if args.do_train:
-        train_data_whole = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="train")
+        # train_data_whole = datasets.load_dataset("MickyMike/cvefixes_bigvul", split="train")
+        train_data_whole = datasets.load_dataset("csv", data_files="../data/cvefixes_bigvul/train.csv", split="train")
         df = pd.DataFrame({"source": train_data_whole["source"], "target": train_data_whole["target"]})
         train_data, val_data = train_test_split(df, test_size=0.1238, random_state=42)
         train_dataset = TextDataset(tokenizer, args, train_data, val_data, file_type='train')
