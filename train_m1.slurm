@@ -30,8 +30,8 @@ cd M1_VulRepair_PL-NL
 python vulrepair_main.py \
     --model_name=model.bin \
     --output_dir=./saved_models \
-    --tokenizer_name=../t5-base-model \
-    --model_name_or_path=../t5-base-model \
+    --tokenizer_name=../codet5-base \
+    --model_name_or_path=../codet5-base \
     --do_train \
     --epochs 75 \
     --encoder_block_size 512 \
