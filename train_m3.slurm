@@ -31,7 +31,7 @@ python t5_no_pretraining_main.py \
     --model_name=model.bin \
     --output_dir=./saved_models \
     --tokenizer_name=./tokenizer/ \
-    --config_name=t5-base \
+    --config_name=../t5-base \
     --do_train \
     --train_data_file=../data/fine_tune_data/train.csv \
     --eval_data_file=../data/fine_tune_data/val.csv \
@@ -39,8 +39,8 @@ python t5_no_pretraining_main.py \
     --epochs 75 \
     --encoder_block_size 512 \
     --decoder_block_size 256 \
-    --train_batch_size 8 \
-    --eval_batch_size 8 \
+    --train_batch_size 4 \
+    --eval_batch_size 4 \
     --learning_rate 2e-5 \
     --max_grad_norm 1.0 \
     --evaluate_during_training \
