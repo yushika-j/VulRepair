@@ -22,7 +22,8 @@ import random
 import numpy as np
 import torch
 from torch.utils.data import DataLoader, Dataset, SequentialSampler, RandomSampler
-from transformers import (AdamW, get_linear_schedule_with_warmup,
+from torch.optim import AdamW
+from transformers import (get_linear_schedule_with_warmup,
                           T5ForConditionalGeneration, RobertaTokenizer, T5Config)
 from tqdm import tqdm
 import pandas as pd
