@@ -1,10 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name=m3_train                            # Job name
+#SBATCH --job-name=m4_inference                        # Job name
 #SBATCH --gres=gpu:1                                   # Request 1 GPU
 #SBATCH --mem=32G                                      # Request 32GB of memory
-#SBATCH --output=results_m3/m3_train.log               # Standard output file
-#SBATCH --error=results_m3/m3_train_error.txt          # Standard error file
-#SBATCH --time=12:15:00                                # Max job time
+#SBATCH --output=results_m4/inference_m4.log        # Standard output file
+#SBATCH --error=results_m4/inference_error_m4.txt      # Standard error file
+#SBATCH --time=07:00:00                                # Max job time
 #SBATCH --cpus-per-task=4                              # CPU cores per task
 #SBATCH --mail-user=rosma012@uottawa.ca                # Email for job updates
 
@@ -23,25 +23,18 @@ pip install datasets --no-index
 pip install gdown --no-index
 pip install tensorboard --no-index
 pip install scikit-learn --no-index
+pip install sentencepiece --no-index
 
-# Move to the directory
-cd M3_T5_no_pretrain_subword
+# M4 directory
+cd M4_T5_base_NL
 
-python t5_no_pretraining_main.py \
-    --model_name=model.bin \
+# testing script
+python t5_base_main.py \
     --output_dir=./saved_models \
-    --tokenizer_name=./tokenizer/ \
-    --config_name=../t5-base \
-    --do_train \
-    --train_data_file=../data/fine_tune_data/train.csv \
-    --eval_data_file=../data/fine_tune_data/val.csv \
-    --test_data_file=../data/fine_tune_data/test.csv \
-    --epochs 75 \
+    --model_name=model4-12h.bin \
+    --tokenizer_name=../t5-base-model \
+    --model_name_or_path=../t5-base-model \
+    --do_test \
     --encoder_block_size 512 \
     --decoder_block_size 256 \
-    --train_batch_size 4 \
-    --eval_batch_size 4 \
-    --learning_rate 2e-5 \
-    --max_grad_norm 1.0 \
-    --evaluate_during_training \
-    --seed 123456  2>&1 | tee train.log
+    --eval_batch_size 1 
