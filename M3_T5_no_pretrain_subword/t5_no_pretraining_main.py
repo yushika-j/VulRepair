@@ -44,7 +44,7 @@ class InputFeatures(object):
         
 
 class TextDataset(Dataset):
-    def __init__(self, tokenizer, args, file_type="train"):
+    def __init__(self, tokenizer, args, file_type):
         if file_type == "train":
             file_path = args.train_data_file
         elif file_type == "eval":
@@ -53,6 +53,9 @@ class TextDataset(Dataset):
             file_path = args.test_data_file
         self.examples = []
         df = pd.read_csv(file_path)
+      #  logger.info(f"{file_type.capitalize()} dataset before deduplication: {df.shape[0]} samples")
+      #  df = df.drop_duplicates().reset_index(drop=True)
+      #  logger.info(f" {file_type.capitalize()} dataset after deduplication: {df.shape[0]} samples")
         sources = df["source"].tolist()
         labels = df["target"].tolist()
         for i in tqdm(range(len(sources))):
@@ -238,7 +241,7 @@ def test(args, model, tokenizer, test_dataset, best_threshold=0.5):
         correct_pred = False
         (input_ids, attention_mask, labels, decoder_input_ids)=[x.squeeze(1).to(args.device) for x in batch]
         with torch.no_grad():
-            beam_outputs = model.generate(input_ids=input_ids,
+            beam_outputs = model.module.generate(input_ids=input_ids,
                                           attention_mask=attention_mask,
                                           do_sample=False, # disable sampling to test if batching affects output
                                           num_beams=args.num_beams,
@@ -246,6 +249,21 @@ def test(args, model, tokenizer, test_dataset, best_threshold=0.5):
                                           max_length=args.decoder_block_size)
         beam_outputs = beam_outputs.detach().cpu().tolist()
         decoder_input_ids = decoder_input_ids.detach().cpu().tolist()
+
+
+        input_text = tokenizer.decode(input_ids[0], skip_special_tokens=True)
+        logger.info("\n==== Input Code Snippet ====")
+        logger.info(input_text[:200] + "...")  # Show only the first 200 characters
+
+        logger.info("\n==== Beam Candidates ====")
+        for idx, single_output in enumerate(beam_outputs):
+                prediction = tokenizer.decode(single_output, skip_special_tokens=True)
+                logger.info(f"Beam {idx + 1}: {prediction}")
+
+        ground_truth = tokenizer.decode(decoder_input_ids[0], skip_special_tokens=True)
+        logger.info("\n==== Ground Truth ====")
+        logger.info(ground_truth)
+
         for single_output in beam_outputs:
             # pred
             prediction = tokenizer.decode(single_output, skip_special_tokens=False)
@@ -274,6 +292,7 @@ def test(args, model, tokenizer, test_dataset, best_threshold=0.5):
 
     # write prediction to file
     df = pd.read_csv(args.test_data_file)
+#    df = df.drop_duplicates().reset_index(drop=True)
     df["raw_predictions"] = raw_predictions
     df["correctly_predicted"] = accuracy
     f_name = args.test_data_file.split("/")[-1].split("_")[:2]
@@ -351,7 +370,7 @@ def main():
     args = parser.parse_args()
     # Setup CUDA, GPU
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    args.n_gpu = 1
+    args.n_gpu = 4
     args.device = device
 
     # Setup logging
@@ -385,6 +404,8 @@ def main():
         model.to(args.device)
         eval_dataset = TextDataset(tokenizer, args, file_type='eval')
         result=evaluate(args, model, tokenizer, eval_dataset)   
+        results.update(result)
+        print(f"Evaluation Results: {result}")
     if args.do_test:
         checkpoint_prefix = f'checkpoint-best-loss/{args.model_name}'
         output_dir = os.path.join(args.output_dir, '{}'.format(checkpoint_prefix))  
@@ -392,6 +413,8 @@ def main():
         model.to(args.device)
         test_dataset = TextDataset(tokenizer, args, file_type='test')
         test(args, model, tokenizer, test_dataset, best_threshold=0.5)
+        test_results = test(args, model, tokenizer, test_dataset, best_threshold=0.5)
+        print(f"Test Results: {test_results}")
     return results
 
 if __name__ == "__main__":
