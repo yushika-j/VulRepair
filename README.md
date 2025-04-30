@@ -20,8 +20,9 @@ We appreciate the efforts of the research community in improving the integrity o
 ![VulRepair](vulrepair.gif)
 
 <p align="center">
-  </a>
-  <h3 align="center"><a href="https://huggingface.co/MickyMike/VulRepair">VulRepair</a></h3>
+  <h3 align="center">
+    <a href="https://huggingface.co/MickyMike/VulRepair">VulRepair</a>
+  </h3>
   <p align="center">
     A T5-based Automated Software Vulnerability Repair
   </p>
@@ -29,7 +30,56 @@ We appreciate the efforts of the research community in improving the integrity o
 
 <div align="center">
 
-## Auto-Repair Real-World Software Vulnerabilities
+![Model Card](https://img.shields.io/badge/Model-HuggingFace-blue?logo=huggingface)
+![License](https://img.shields.io/badge/License-MIT-brightgreen)
+![Language](https://img.shields.io/badge/Language-Python%203.8+-yellow)
+
+</div>
+
+---
+
+# 🔧 Automatic Vulnerability Repair in Source Code
+
+**CSI 4900 Final Project**  
+Contributors:  
+- Yushika Jhundoo – pjhun035@uottawa.ca  
+- Olena Naim – onaim017@uottawa.ca  
+- Rina Osman – rosma012@uottawa.ca
+
+
+
+
+<h1>Project Overview</h1>
+This project implements and evaluates VulRepair, a T5-based automated vulnerability repair model. VulRepair is designed to generate vulnerability patches for buggy C/C++ functions using deep learning. It improves upon previous models like VRepair by:
+<ul>
+<li>Leveraging pre-trained CodeT5 on natural and programming language corpora</li>
+
+<li>Using BPE (Byte Pair Encoding) tokenization to handle OOV (out-of-vocabulary) tokens</li>
+
+<li>Adopting a T5 encoder-decoder architecture with relative positional encoding</li>
+
+The system was evaluated using the CVEFixes and Big-Vul datasets, containing over 8,400 real-world vulnerability fixes.
+</ul>
+
+<h1>Prerequisites</h1>
+<ul>
+<li>Python 3.8+</li>
+<li>CUDA-enabled GPU (for training)</li>
+<li>Git</li>
+<li>virtualenv or conda (recommended)</li>
+
+<h1>Installation</h1>
+<p>After cloning the VulRepair repository, follow these step: </br>
+<ul>
+  <li># Create and activate a virtual environment </br>
+-python -m venv venv</br>
+-source venv/bin/activate  # or venv\Scripts\activate on Windows</li>
+
+
+<li># Install dependencies
+pip install -r requirements.txt</p></li>
+</ul>
+<h1> Auto-Repair Real-World Software Vulnerabilities</h1>
 
 </div>
 
