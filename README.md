@@ -78,8 +78,12 @@ The system was evaluated using the CVEFixes and Big-Vul datasets, containing ove
 
 <li># Install dependencies
 pip install -r requirements.txt</p></li>
+
+<li>If resources like Alliance is being used to run the models, you can make use of the SLURM scripts in the file folders(.sh) </li></br>
+To run the SLURM scripts, you can use the command the following command: sbatch {filename.sh}</li>
 </ul>
 
+---
 
 <h4>
     <b>
