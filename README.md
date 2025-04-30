@@ -79,97 +79,7 @@ The system was evaluated using the CVEFixes and Big-Vul datasets, containing ove
 <li># Install dependencies
 pip install -r requirements.txt</p></li>
 </ul>
-<h1> Auto-Repair Real-World Software Vulnerabilities</h1>
 
-</div>
-
-<details open="open">
-<summary></summary>
-
-<h3>
-    <b>
-        <div align="center">
-            VulRepair Performance on <a href="https://cwe.mitre.org/top25/archive/2021/2021_cwe_top25.html">Top-25 Most Dangerous CWEs in 2021</a>
-        </div>
-    </b>
-</h3>
-  
-<div align="center">
-    
-| Rank | CWE Type |                     Name                     |  %PP | Proportion |
-|:----:|:--------:|:--------------------------------------------:|:----:|:----------:|
-|   1  |  CWE-787 |              Out-of-bounds Write             |  30% |    16/53   |
-|   2  |  CWE-79  |             Cross-site Scripting             |   0  |     0/1    |
-|   3  |  CWE-125 |              Out-of-bounds Read              |  32% |   54/170   |
-|   4  |  CWE-20  |           Improper Input Validation          |  45% |   68/152   |
-|   5  |  CWE-78  |             OS Command Injection             |  33% |     1/3    |
-|   6  |  CWE-89  |                 SQL Injection                |  20% |     1/5    |
-|   7  |  CWE-416 |                Use After Free                |  53% |    29/55   |
-|   8  |  CWE-22  |                Path Traversal                |  25% |     2/8    |
-|   9  |  CWE-352 |          Cross-Site Request Forgery          |   0  |     0/2    |
-|  10  |  CWE-434 |              Dangerous File Type             |   -  |      -     |
-|  11  |  CWE-306 | Missing Authentication for Critical Function |   -  |      -     |
-|  12  |  CWE-190 |        Integer Overflow or Wraparound        |  53% |    31/59   |
-|  13  |  CWE-502 |       Deserialization of Untrusted Data      |   -  |      -     |
-|  14  |  CWE-287 |            Improper Authentication           |  50% |     3/6    |
-|  15  |  CWE-476 |           NULL Pointer Dereference           |  66% |    46/70   |
-|  16  |  CWE-798 |         Use of Hard-coded Credentials        |   -  |      -     |
-|  17  |  CWE-119 |      Improper Restriction of Operations      |  37% |   141/386  |
-|  18  |  CWE-862 |             Missing Authorization            |   0  |     0/2    |
-|  19  |  CWE-276 |         Incorrect Default Permissions        |   -  |      -     |
-|  20  |  CWE-200 |       Exposure of Sensitive Information      |  61% |    39/64   |
-|  21  |  CWE-522 |     Insufficiently Protected Credentials     |   0  |     0/4    |
-|  22  |  CWE-732 |        Incorrect Permission Assignment       |  50% |     1/2    |
-|  23  |  CWE-611 |     Improper Restriction of XML Reference    |   0  |     0/3    |
-|  24  |  CWE-918 |      Server-Side Request Forgery (SSRF)      |   0  |     0/1    |
-|  25  |  CWE-77  |               Command Injection              | 100% |     2/2    |
-|      |          |                     TOTAL                    |  41% |  434/1048  |
-
-<h3>
-    <b>
-        <div align="center">
-            Top-10 Most Accurately Repaired CWE Types of VulRepair  
-        </div>
-    </b>
-</h3>
-  
-| Rank | CWE Type |                      Name                     |  %PP | Proportion |
-|:----:|:--------:|:---------------------------------------------:|:----:|:----------:|
-|   1  |  CWE-755 |  Improper Handling of Exceptional Conditions  | 100% |     1/1    |
-|   2  |  CWE-706 | Use of Incorrectly-Resolved Name or Reference | 100% |     1/1    |
-|   3  |  CWE-326 |         Inadequate Encryption Strength        | 100% |     2/2    |
-|   4  |  CWE-667 |                Improper Locking               | 100% |     1/1    |
-|   5  |  CWE-369 |                 Divide By Zero                | 100% |     5/5    |
-|   6  |  CWE-77  |               Command Injection               | 100% |     2/2    |
-|   7  |  CWE-388 |                 Error Handling                | 100% |     1/1    |
-|   8  |  CWE-436 |            Interpretation Conflict            | 100% |     1/1    |
-|   9  |  CWE-191 |               Integer Underflow               | 100% |     2/2    |
-|  10  |  CWE-285 |            Improper Access Control            |  75% |     6/8    |
-|      |          |                     TOTAL                     |  92% |    22/24   |
- 
-<h3>
-    <b>
-        <div align="center">
-            VulRepair Performance on Top-10 Majority CWE Types in Testing Data
-        </div>
-    </b>
-</h3>
-  
-| Rank | CWE Type |                     Name                     |   %PP  | Proportion |
-|:----:|:--------:|:--------------------------------------------:|:------:|:----------:|
-|   1  |  CWE-119 |      Improper Restriction of Operations      | 37% |   141/386  |
-|   2  |  CWE-125 |              Out-of-bounds Read              | 32% |   54/170   |
-|   3  |  CWE-20  |           Improper Input Validation          | 45% |   68/152   |
-|   4  |  CWE-264 | Permissions, Privileges, and Access Controls | 51% |    36/71   |
-|   5  |  CWE-476 |           NULL Pointer Dereference           | 66% |    46/70   |
-|   6  |  CWE-200 |       Exposure of Sensitive Information      | 61% |    39/64   |
-|   7  |  CWE-399 |          Resource Management Errors          | 62% |    37/60   |
-|   8  |  CWE-190 |        Integer Overflow or Wraparound        | 53% |    31/59   |
-|   9  |  CWE-416 |                Use After Free                | 53% |    29/55   |
-|  10  |  CWE-362 |                Race Condition                | 43% |    23/54   |
-|      |          |                     TOTAL                    |   44%  |  504/1141  |
-
-</div> 
 
 <h4>
     <b>
@@ -514,6 +424,98 @@ python vulrepair_main.py \
 </div>
 
 </details>
+
+<h1> Auto-Repair Real-World Software Vulnerabilities</h1>
+
+</div>
+
+<details open="open">
+<summary></summary>
+
+<h3>
+    <b>
+        <div align="center">
+            VulRepair Performance on <a href="https://cwe.mitre.org/top25/archive/2021/2021_cwe_top25.html">Top-25 Most Dangerous CWEs in 2021</a>
+        </div>
+    </b>
+</h3>
+  
+<div align="center">
+    
+| Rank | CWE Type |                     Name                     |  %PP | Proportion |
+|:----:|:--------:|:--------------------------------------------:|:----:|:----------:|
+|   1  |  CWE-787 |              Out-of-bounds Write             |  30% |    16/53   |
+|   2  |  CWE-79  |             Cross-site Scripting             |   0  |     0/1    |
+|   3  |  CWE-125 |              Out-of-bounds Read              |  32% |   54/170   |
+|   4  |  CWE-20  |           Improper Input Validation          |  45% |   68/152   |
+|   5  |  CWE-78  |             OS Command Injection             |  33% |     1/3    |
+|   6  |  CWE-89  |                 SQL Injection                |  20% |     1/5    |
+|   7  |  CWE-416 |                Use After Free                |  53% |    29/55   |
+|   8  |  CWE-22  |                Path Traversal                |  25% |     2/8    |
+|   9  |  CWE-352 |          Cross-Site Request Forgery          |   0  |     0/2    |
+|  10  |  CWE-434 |              Dangerous File Type             |   -  |      -     |
+|  11  |  CWE-306 | Missing Authentication for Critical Function |   -  |      -     |
+|  12  |  CWE-190 |        Integer Overflow or Wraparound        |  53% |    31/59   |
+|  13  |  CWE-502 |       Deserialization of Untrusted Data      |   -  |      -     |
+|  14  |  CWE-287 |            Improper Authentication           |  50% |     3/6    |
+|  15  |  CWE-476 |           NULL Pointer Dereference           |  66% |    46/70   |
+|  16  |  CWE-798 |         Use of Hard-coded Credentials        |   -  |      -     |
+|  17  |  CWE-119 |      Improper Restriction of Operations      |  37% |   141/386  |
+|  18  |  CWE-862 |             Missing Authorization            |   0  |     0/2    |
+|  19  |  CWE-276 |         Incorrect Default Permissions        |   -  |      -     |
+|  20  |  CWE-200 |       Exposure of Sensitive Information      |  61% |    39/64   |
+|  21  |  CWE-522 |     Insufficiently Protected Credentials     |   0  |     0/4    |
+|  22  |  CWE-732 |        Incorrect Permission Assignment       |  50% |     1/2    |
+|  23  |  CWE-611 |     Improper Restriction of XML Reference    |   0  |     0/3    |
+|  24  |  CWE-918 |      Server-Side Request Forgery (SSRF)      |   0  |     0/1    |
+|  25  |  CWE-77  |               Command Injection              | 100% |     2/2    |
+|      |          |                     TOTAL                    |  41% |  434/1048  |
+
+<h3>
+    <b>
+        <div align="center">
+            Top-10 Most Accurately Repaired CWE Types of VulRepair  
+        </div>
+    </b>
+</h3>
+  
+| Rank | CWE Type |                      Name                     |  %PP | Proportion |
+|:----:|:--------:|:---------------------------------------------:|:----:|:----------:|
+|   1  |  CWE-755 |  Improper Handling of Exceptional Conditions  | 100% |     1/1    |
+|   2  |  CWE-706 | Use of Incorrectly-Resolved Name or Reference | 100% |     1/1    |
+|   3  |  CWE-326 |         Inadequate Encryption Strength        | 100% |     2/2    |
+|   4  |  CWE-667 |                Improper Locking               | 100% |     1/1    |
+|   5  |  CWE-369 |                 Divide By Zero                | 100% |     5/5    |
+|   6  |  CWE-77  |               Command Injection               | 100% |     2/2    |
+|   7  |  CWE-388 |                 Error Handling                | 100% |     1/1    |
+|   8  |  CWE-436 |            Interpretation Conflict            | 100% |     1/1    |
+|   9  |  CWE-191 |               Integer Underflow               | 100% |     2/2    |
+|  10  |  CWE-285 |            Improper Access Control            |  75% |     6/8    |
+|      |          |                     TOTAL                     |  92% |    22/24   |
+ 
+<h3>
+    <b>
+        <div align="center">
+            VulRepair Performance on Top-10 Majority CWE Types in Testing Data
+        </div>
+    </b>
+</h3>
+  
+| Rank | CWE Type |                     Name                     |   %PP  | Proportion |
+|:----:|:--------:|:--------------------------------------------:|:------:|:----------:|
+|   1  |  CWE-119 |      Improper Restriction of Operations      | 37% |   141/386  |
+|   2  |  CWE-125 |              Out-of-bounds Read              | 32% |   54/170   |
+|   3  |  CWE-20  |           Improper Input Validation          | 45% |   68/152   |
+|   4  |  CWE-264 | Permissions, Privileges, and Access Controls | 51% |    36/71   |
+|   5  |  CWE-476 |           NULL Pointer Dereference           | 66% |    46/70   |
+|   6  |  CWE-200 |       Exposure of Sensitive Information      | 61% |    39/64   |
+|   7  |  CWE-399 |          Resource Management Errors          | 62% |    37/60   |
+|   8  |  CWE-190 |        Integer Overflow or Wraparound        | 53% |    31/59   |
+|   9  |  CWE-416 |                Use After Free                | 53% |    29/55   |
+|  10  |  CWE-362 |                Race Condition                | 43% |    23/54   |
+|      |          |                     TOTAL                    |   44%  |  504/1141  |
+
+</div> 
 
 ## Acknowledgements
 * Special thanks to authors of VRepair (<a href="https://arxiv.org/pdf/2104.08308.pdf">Chen et al.</a>)
